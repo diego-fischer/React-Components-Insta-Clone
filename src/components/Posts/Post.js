@@ -5,6 +5,12 @@ import React, { useState } from 'react'
 
 const Post = (props) => {
   const { post } = props
+  const [numOfLikes, setNumOfLikes] = useState(post.likes)
+
+  const likePost = () => {
+    setNumOfLikes(numOfLikes + 1)
+    console.log('LIKES', numOfLikes)
+  }
 
   return (
     <div className='post-border'>
@@ -14,9 +20,9 @@ const Post = (props) => {
       </div>
 
       <LikeSection
-        numberOfLikes={post.likes}
-        likePost={likePost}
+        numOfLikes={numOfLikes}
         postID={post.id}
+        likePost={likePost}
       />
 
       <Comments comments={post.comments} />

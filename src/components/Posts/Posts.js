@@ -3,12 +3,12 @@ import Post from './Post'
 import './Posts.css'
 
 const Posts = (props) => {
-  const { likePost, posts } = props
+  const { posts } = props
 
   return (
     <div className='posts-container-wrapper'>
       {posts.map((el) => {
-        return <Post post={el} likePost={likePost} />
+        return <Post post={el} />
       })}
     </div>
   )
