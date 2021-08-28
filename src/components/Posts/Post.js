@@ -1,31 +1,33 @@
-import React from 'react';
-import Comments from '../Comments/Comments';
-import LikeSection from './LikeSection';
-import PostHeader from './PostHeader';
+import Comments from '../Comments/Comments'
+import LikeSection from './LikeSection'
+import PostHeader from './PostHeader'
+import React, { useState } from 'react'
 
-const Post = props => {
-  // 🔥 Make sure the parent of Post is passing the right props!
-  const { post, likePost } = props;
+const Post = (props) => {
+  const { post } = props
+  const [numOfLikes, setNumOfLikes] = useState(post.likes)
+
+  const likePost = () => {
+    setNumOfLikes(numOfLikes + 1)
+    console.log('LIKES', numOfLikes)
+  }
 
   return (
     <div className='post-border'>
-      <PostHeader
-        username={post.username}
-        thumbnailUrl={post.thumbnailUrl}
-      />
+      <PostHeader username={post.username} thumbnailUrl={post.thumbnailUrl} />
       <div className='post-image-wrapper'>
-        <img
-          alt='post thumbnail'
-          className='post-image'
-          src={post.imageUrl}
-        />
+        <img alt='post thumbnail' className='post-image' src={post.imageUrl} />
       </div>
-      {/* Is LikeSection getting all the props it needs to work correctly? */}
-      <LikeSection likePost={() => likePost(post.id)} />
-      {/* Comments also wants its props! */}
-      <Comments />
-    </div>
-  );
-};
 
-export default Post;
+      <LikeSection
+        numOfLikes={numOfLikes}
+        postID={post.id}
+        likePost={likePost}
+      />
+
+      <Comments comments={post.comments} />
+    </div>
+  )
+}
+
+export default Post
